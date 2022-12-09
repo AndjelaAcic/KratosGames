@@ -41,7 +41,7 @@ if(productId!=null)
             //display image with url if it exists
             String imgUrl = rst.getString(3);
             if(imgUrl!=null)         
-           out.print("<img src="+imgUrl+">");
+           out.print("<img style=\"max-width: 300px; height: auto; \" src="+imgUrl+">");
             
            String img = rst.getString(4);
            if(img!=null)
