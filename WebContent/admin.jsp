@@ -9,13 +9,10 @@
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-
   // Load the Visualization API and the corechart package.
   
-
   // Set a callback to run when the Google Visualization API is loaded.
   //google.charts.setOnLoadCallback(drawChart);
-
   // Callback that creates and populates a data table,
   // instantiates the pie chart, passes in the data and
   // draws it.
@@ -32,15 +29,19 @@
 %>
 <%
 String userName = (String) session.getAttribute("authenticatedUser");
-
 	if(userName != null)
 	{
 		//retrive customer info
-
 		getConnection();
 		String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustServerCertificate=True";		
 		String uid = "sa";
 		String pw = "304#sa#pw";
+		out.print("<h2>Things you can change</h2>");
+		out.print("<br>");
+		out.print("<a href=\"test1.jsp\"><h2>Add products</h2></a>");
+		out.print("<h2><a href=\"delete_file.jsp\">Delete products</a></h2>");
+		out.print("<h2><a href=\"test3.jsp\">Update products</a></h2>");
+		out.print("<br>");
 		out.print("<h2>Customer profile</h2>");
 		out.print("<table border=\"1\"><tr><th>Order Date</th><th>Total Order Amount</th></tr>");
 		try ( Connection con = DriverManager.getConnection(url, uid, pw);
@@ -69,7 +70,6 @@ String userName = (String) session.getAttribute("authenticatedUser");
                 out.print("<td>"+rst1.getString(4)+"</td></tr>");
             }
 			out.print("</table>");
-
 			out.print("<h2>All registered customers: </h2>");
 			out.print("<table border=\"1\"><tr><th>Customer Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>State</th><th>Phone Number:</th></tr>");
 			String sql2 = "SELECT  customerId,firstName,lastName,email, state, phonenum FROM customer" ; 
@@ -86,7 +86,6 @@ String userName = (String) session.getAttribute("authenticatedUser");
 			}
 			
 			out.print("</table>");
-
 			%>
 			<div id="chart_div"></div>
 		<script>
@@ -96,7 +95,6 @@ String userName = (String) session.getAttribute("authenticatedUser");
 			function drawChart(dates, sales) {
 				sales = <% out.print(listofNums);%>;
 				dates = <% out.print(listofDates);%>;
-
 	var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 	
 	// Create the data table.
@@ -107,9 +105,7 @@ String userName = (String) session.getAttribute("authenticatedUser");
         const str = String(dates[i]);
         const d = new Date(str.substring(0,4)+"-"+str.substring(4,6)+"-"+str.substring(6,8));
         data.addRow([d,sales[i]]);
-
       }
-
 	  
     /*
 		data.addRows([
@@ -135,9 +131,7 @@ String userName = (String) session.getAttribute("authenticatedUser");
           title: 'Total Order Amount($)'
         }
       };
-
       
-
       chart.draw(data, options);
   }
 		google.charts.load('current', {'packages':['corechart']}).then(drawChart);
@@ -151,18 +145,13 @@ String userName = (String) session.getAttribute("authenticatedUser");
 		}
 		
 		
-
-
 	}
 	else
 	{
 		out.print("User is not authenticated!");
 	}
-
 	
-
 %>
 
 </body>
 </html>
-
