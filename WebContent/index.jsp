@@ -7,6 +7,8 @@
 <h1 align="center">Welcome to Ray's Grocery</h1>
 
 <h2 align="center"><a href="login.jsp">Login</a></h2>
+<h2 align="center"><a href="register.jsp">Register</a></h2>
+<h2 align="center"><a href="editCustomer.jsp">Edit information</a></h2>
 
 <h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>
 

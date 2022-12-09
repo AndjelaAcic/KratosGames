@@ -71,14 +71,14 @@ String userName = (String) session.getAttribute("authenticatedUser");
 			out.print("</table>");
 
 			out.print("<h2>All registered customers: </h2>");
-			out.print("<table border=\"1\"><tr><th>Customer Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>State</th></tr>");
-			String sql2 = "SELECT  customerId,firstName,lastName,email, state FROM customer" ; 
+			out.print("<table border=\"1\"><tr><th>Customer Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>State</th><th>Phone Number:</th></tr>");
+			String sql2 = "SELECT  customerId,firstName,lastName,email, state, phonenum FROM customer" ; 
 			PreparedStatement pstmt2=con.prepareStatement(sql2);
 			ResultSet rst2 = pstmt2.executeQuery();
 			while(rst2.next())
 			{
 				out.print("<tr>");
-				for(int i=1;i<=5;i++)
+				for(int i=1;i<=6;i++)
 				{
 					out.print("<td>"+ rst2.getString(i)+"</td>");
 				}
