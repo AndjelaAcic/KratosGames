@@ -12,6 +12,8 @@
 
 <%@ include file="header.jsp" %>
 
+
+
 <%
 // Get product name to search for
 // TODO: Retrieve and display info for the product
@@ -36,6 +38,8 @@ if(productId!=null)
             rst.next();
             out.print("<h2>"+rst.getString(1)+"</h2>");
             
+            //send ProductId
+            session.setAttribute("currectProductId",productId);
 
 
             //display image with url if it exists
@@ -52,33 +56,11 @@ if(productId!=null)
             out.print("<h2>Id: "+productId+"</h2>");
             out.print("<b>Description: </b><p>"+rst.getString(5) +"</p>");
 
-            
-            //list reviews
-
-            out.print("<h2>Reviews: </h2>");
-            String reviewSQL = "SELECT userid, reviewDate, reviewRating,reviewComment FROM review INNER JOIN customer ON review.customerId = customer.customerId WHERE productId = ?";
-            PreparedStatement stmtReview = con.prepareStatement(reviewSQL);
-            stmtReview.setInt(1,Integer.parseInt(productId));
-            ResultSet rstReview = stmtReview.executeQuery();
-
-            if(rstReview == null || !rstReview.isBeforeFirst())
-				{
-                    out.print("<p>No reviews available for this product!</p>");
-                }
-            else
-            {
-               
-                while(rstReview.next())
-                {
-                    out.print("<p>"+ rstReview.getString(1)+" said on "+ rstReview.getString(2).substring(0,10)+": "+ rstReview.getString(4)+"(Rating: "+ rstReview.getString(3)+")</p>");
-                }
-            }
-
             String link = "addcart.jsp?id="+productId+"&name="+rst.getString(1)+"&price="+rst.getString(2);
 			link =link.replace(" ","+");
 					
 					//link.replace("'","%27");
-					out.print("<td><a href="+link+">Add to Cart</a></td>");
+					//out.print("<td><a href="+link+">Add to Cart</a></td>");
            
             
 
@@ -96,11 +78,7 @@ else
 {
     out.print("Error - no product id passed");
 }
-out.print("<h2><a href=\"listprod.jsp\">Continue Shopping</a></h2>");
-
-
-
-
+out.print("<h2><a href=\"listprodForReview.jsp\">Review Other Products</a></h2>");
 
 
 // TODO: If there is a productImageURL, display using IMG tag
@@ -110,6 +88,24 @@ out.print("<h2><a href=\"listprod.jsp\">Continue Shopping</a></h2>");
 // TODO: Add links to Add to Cart and Continue Shopping
 %>
 
+<form name="MyForm" method=post action="validateReview.jsp">
+    <table style="display:inline">
+    <tr>
+        <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Rating(1-10):</font></div></td>
+        <td><input type="text" name="reviewScore"  size=50 maxlength=50></td>
+    </tr>
+    <tr>
+        <td><div align="right"><font face="Arial, Helvetica, sans-serif" size="2">Comments about this product:</font></div></td>
+        <td><textarea rows="10" cols="100" name="comment" >Write your review here!</textarea></td>
+    </tr>
+   
+    </table>
+    <br>
+    <br>	
+    <input class="submit" type="submit" name="Submit2" value="Submit Review">
+    </form>
+    
+    </div>
 </body>
 </html>
 
