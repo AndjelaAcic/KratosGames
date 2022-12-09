@@ -1,4 +1,5 @@
 <%@ include file="jdbc.jsp" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -83,7 +84,85 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 
 %>
 </div>
+
+<%
+// TODO: Display user name that is logged in (or nothing if not logged in)
+
+
+
+if(userName!=null){
+out.print("<h3 align=\"center\"> Recommended for "+userName+":</body><h3>");
+
+        //32 to 156    
+// all games user bought
+out.print("<div align=\"center\">");
+try ( Connection con = DriverManager.getConnection(url, uid, pw);
+	          Statement stmt = con.createStatement();) 
+	    {
+                String sql1 = "SELECT orderproduct.productId FROM orderproduct INNER JOIN ordersummary ON ordersummary.orderId = orderproduct.orderId WHERE customerId = (SELECT customerId FROM customer WHERE userid = ?) ";
+                PreparedStatement pstmt = con.prepareStatement(sql1);
+                pstmt.setString(1, userName);
+                ResultSet rst = pstmt.executeQuery();
+                HashSet<Integer> hset = new HashSet<>();
+                        HashSet<Integer> hset2 = new HashSet<>();
+                ArrayList<Integer> itemstoshow = new ArrayList<>();
+                        ArrayList<String> itemstoshowlink = new ArrayList<>();
+                while(rst.next())
+                {
+                        hset.add(rst.getInt(1));
+                    //    out.print(rst.getInt(1)+"<br>");
+                }
+
+                Random r = new Random();
+                int low = 0;
+                
+                
+
+                String sql2 = "SELECT * FROM product";
+                PreparedStatement pstmt2 = con.prepareStatement(sql2);
+                ResultSet rst2 = pstmt2.executeQuery();
+
+             
+                while(rst2.next())
+                {
+                       
+                        int toaddid = rst2.getInt(1);
+                        if(!hset.contains(toaddid))
+                        {
+                                itemstoshow.add(toaddid);
+                                itemstoshowlink.add(rst2.getString(4));
+                        }
+                }
+                int high = itemstoshow.size();
+                while(hset2.size()!=5)
+                {
+                        
+                      
+                        int result = r.nextInt(high-low) + low;
+                        hset2.add(result);
+                        
+
+                }
+                for (Integer ele : hset2) {
+
+                        String imgUrl = itemstoshowlink.get(ele);
+                        if(imgUrl!=null)         
+                       { String linkprod ="product.jsp?id="+itemstoshow.get(ele);
+                        out.print("<a href =" +linkprod+ ">"+"<img style=\"max-width: 200px; height: auto; margin:0px 20px\" src="+imgUrl+">"+"</a>");
+                        }
+                    }
+
+
+            }
+
+            catch (SQLException ex)
+            {
+                    out.println("SQLException: " + ex);
+            }
+        }
+        out.print("</div>");
+%>
 </body>
-</head>
+</html>
 
 
