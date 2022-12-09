@@ -38,12 +38,12 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 	    {		
 			PreparedStatement stmt = con.prepareStatement("SELECT orderId,customer.customerId, CONCAT(firstName,' ', lastName) AS cname, CONCAT('$', totalAmount) AS ta FROM ordersummary JOIN customer ON customer.customerId=ordersummary.customerId  WHERE userid = ?");
 			stmt.setString(1,userName);
-			out.print("<table border=\"1\">");
+			out.print("<table class=\"styled-table\">");
 			ResultSet rst = stmt.executeQuery();
 			
 			while (rst.next())
 			{	
-				out.print("<tr><th>OrderId</th><th>CustomerId</th><th>Customer Name</th><th>Total Amount</th></tr>");
+				out.print("<thead><tr><th>OrderId</th><th>CustomerId</th><th>Customer Name</th><th>Total Amount</th></tr></thead>");
 				int orderid = rst.getInt(1);
 				PreparedStatement innerstmt=con.prepareStatement("SELECT productId,quantity,CONCAT('$',price) AS prop FROM orderproduct WHERE orderId=?");
 				innerstmt.setInt(1,orderid);
@@ -55,7 +55,7 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 				}
 				out.print("</tr>");
 				
-				out.print("<tr align=\"right\"><td colspan=\"4\"><table border=\"1\">");
+				out.print("<tr align=\"right\"><td colspan=\"4\"><table class=\"styled-table\">");
 				out.print("<tr><th>ProductId</th><th>Quantity</th><th>Price</th></tr>");
 				
 				while (innerrst.next())

@@ -6,30 +6,14 @@
         <title>Kratos Games Main Page</title>
 </head>
 <body>
-<h1 align="center">Welcome to Kratos Games</h1>
-
-<h2 align="center"><a href="login.jsp">Login</a></h2>
-<h2 align="center"><a href="register.jsp">Register</a></h2>
-<h2 align="center"><a href="editCustomer.jsp">Edit information</a></h2>
-
-<h2 align="center"><a href="listprod.jsp">Begin Shopping</a></h2>
-<h2 align="center"><a href="listprodForReview.jsp">Review Products</a></h2>
-
-<h2 align="center"><a href="listorder.jsp">List All Orders</a></h2>
-
-<h2 align="center"><a href="customer.jsp">Customer Info</a></h2>
-
-<h2 align="center"><a href="admin.jsp">Administrators</a></h2>
-
-<h2 align="center"><a href="logout.jsp">Log out</a></h2>
+        <%@ include file="header.jsp" %>
 
 <%
 // TODO: Display user name that is logged in (or nothing if not logged in)
 
 String userName = (String) session.getAttribute("authenticatedUser");
 
-if(userName!=null)
-out.print("<h3 align=\"center\"> Signed in as: "+userName+"</body><h3>");
+
 %>
 
 <h2 align="center">Our best sellers:</h2>

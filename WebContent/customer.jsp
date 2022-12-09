@@ -21,7 +21,7 @@
 		String uid = "sa";
 		String pw = "304#sa#pw";
 		out.print("<h2>Customer profile</h2>");
-		out.print("<table border=\"1\">");
+		out.print("<table class=\"styled-table\">");
 		try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	          Statement stmt = con.createStatement();) 
 	    {

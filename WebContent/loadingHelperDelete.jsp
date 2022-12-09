@@ -30,7 +30,7 @@
 					//insert categories
 
 					
-					String sqlct = "DELETE FROM category";
+					String sqlct = "DELETE FROM customer WHERE customerId IN (6,7,8)";
 					PreparedStatement stmtct = con.prepareStatement(sqlct);
 					stmtct.executeUpdate();
 

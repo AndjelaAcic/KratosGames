@@ -46,7 +46,7 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 		try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	          Statement stmt = con.createStatement();) 
 	    {		
-			out.print("<table>");
+			
 				ResultSet rst,categoryrst;
 			if(request.getParameter("productName")!=null) 
 			{
@@ -70,7 +70,9 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 
 			PreparedStatement categorystmt = con.prepareStatement("SELECT categoryId, categoryName FROM category");
 			categoryrst = categorystmt.executeQuery();
-			out.print("<tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr>");
+
+
+
 			out.print("<h2>Search for products by category:</h2>");
 			out.print("<h3>Select option \"All\" to show products from all categories!</h3>");
 			out.print("<form method=\"get\" action=\"listprod.jsp\">");
@@ -85,6 +87,10 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 				allCategories.put("cat"+categoryrst.getString(1),categoryrst.getString(2));
 			}
 			out.print("<br><input type=\"submit\" value=\"Filter\"></form>");
+			
+			out.print("<table class=\"styled-table\">  <thead>");
+			out.print("<tr><th></th><th>Product Name</th><th>Category</th><th>Price</th></tr></thead>");
+			
 
 			//listing selected filters
 			Map<String, String[]> parameters = request.getParameterMap();
@@ -102,7 +108,7 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 				}
 			if(countCat==0) out.print("All");
 
-			out.print("<h2>All products:</h2>");
+			out.print("<h2>All products:</h2><tbody>");
 			while (rst.next())
 			{	
 					//show if no categories are selected or it fits the category 
@@ -128,7 +134,7 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 						out.print("</tr>");
 					}
 			}
-			out.print("</table>");
+			out.print("</tbody></table>");
 		}
 		catch (SQLException ex)
 		{

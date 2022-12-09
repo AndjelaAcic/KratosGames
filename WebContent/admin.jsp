@@ -43,7 +43,7 @@ String userName = (String) session.getAttribute("authenticatedUser");
 		out.print("<h2><a href=\"test3.jsp\">Update products</a></h2>");
 		out.print("<br>");
 		out.print("<h2>Customer profile</h2>");
-		out.print("<table border=\"1\"><tr><th>Order Date</th><th>Total Order Amount</th></tr>");
+		out.print("<table class=\"styled-table\"><thead><tr><th>Order Date</th><th>Total Order Amount</th></tr></thead>");
 		try ( Connection con = DriverManager.getConnection(url, uid, pw);
 	          Statement stmt = con.createStatement();) 
 	    {
@@ -71,7 +71,7 @@ String userName = (String) session.getAttribute("authenticatedUser");
             }
 			out.print("</table>");
 			out.print("<h2>All registered customers: </h2>");
-			out.print("<table border=\"1\"><tr><th>Customer Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>State</th><th>Phone Number:</th></tr>");
+			out.print("<table class=\"styled-table\"><thead><tr><th>Customer Id</th><th>First Name</th><th>Last Name</th><th>Email</th><th>State</th><th>Phone Number:</th></tr></thead>");
 			String sql2 = "SELECT  customerId,firstName,lastName,email, state, phonenum FROM customer" ; 
 			PreparedStatement pstmt2=con.prepareStatement(sql2);
 			ResultSet rst2 = pstmt2.executeQuery();
