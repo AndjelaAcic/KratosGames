@@ -81,7 +81,7 @@ String url = "jdbc:sqlserver://cosc304_sqlserver:1433;DatabaseName=orders;TrustS
 			while(categoryrst.next())
 			{
 				out.print("<input type=\"checkbox\" id="+"cat"+categoryrst.getString(1)+" name="+"cat"+ categoryrst.getString(1)+" value="+categoryrst.getString(2)+">");
-				out.print("<label for="+ "cat"+ categoryrst.getString(1)+"> "+ categoryrst.getString(2)+categoryrst.getString(1)+"</label><br>");
+				out.print("<label for="+ "cat"+ categoryrst.getString(1)+"> "+ categoryrst.getString(2)+"</label><br>");
 				allCategories.put("cat"+categoryrst.getString(1),categoryrst.getString(2));
 			}
 			out.print("<br><input type=\"submit\" value=\"Filter\"></form>");

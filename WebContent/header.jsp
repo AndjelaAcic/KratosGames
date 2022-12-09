@@ -4,7 +4,7 @@
       font-family: Arial, Helvetica, sans-serif;
     }
     
-    .example { background-color: rgb(0, 0, 0); } 
+    .example { background-color: #3d195f; } 
 
     .topnav {
       overflow: hidden;
@@ -31,10 +31,11 @@
     }
     </style>
 <H1 class ="example" align="center">
-    <font face="cursive" class ="example" color="#3399FF">
-        <div class ="example">
-            <a href="index.jsp">
-            <font color = '#ffffff'>KratosGaming</font></a>
+    <font class ="example" color="#3399FF">
+       
+        <div>
+          <a href="index.jsp">
+          <img style="max-width: 300px; height: auto;" src="logopurple.png"></a>
         </div>
         <div class="topnav">
           <a class="active" href=\"editCustomer.jsp\">Home</a>
