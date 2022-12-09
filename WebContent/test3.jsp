@@ -8,7 +8,7 @@
 	<%@ include file="header.jsp" %>
 <div style="margin:0 auto;text-align:center;display:inline">
 
-<h3>Add products</h3>
+<h3>Update product</h3>
 
 <%
 // Print prior error login message if present

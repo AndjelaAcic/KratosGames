@@ -49,7 +49,7 @@
 			
                     
 
-					retStr = "Successfully added to the database!";
+					retStr = "Successfully deleted product!";
 		
 				} 
 				catch (SQLException ex) {
